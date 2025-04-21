@@ -146,7 +146,7 @@ def evaluate_model(model_path='fashion_model_best.pt'):
         current_accuracy = 100 * correct / total
         print(f'Current Evaluation Accuracy: {current_accuracy:.2f}%')
 
-        # Show sample predictions
+        # sample predictions
         print("Sample Predictions:")
         num_samples = 5
         for i in range(num_samples):
@@ -160,9 +160,9 @@ def evaluate_model(model_path='fashion_model_best.pt'):
     except Exception as e:
         print(f"Error during evaluation: {str(e)}")
 
-# training and evaluation r
+# training and evaluation 
 if __name__ == "__main__":
-    # Set device
+
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
     
