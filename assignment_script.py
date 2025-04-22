@@ -7,11 +7,12 @@ import os
 from urllib.request import urlretrieve
 import gzip
 
-# Manual download URLs
-TRAIN_IMAGES_URL = 'https://github.com/zalandoresearch/fashion-mnist/raw/master/data/fashion/train-images-idx3-ubyte.gz'
-TRAIN_LABELS_URL = 'https://github.com/zalandoresearch/fashion-mnist/raw/master/data/fashion/train-labels-idx1-ubyte.gz'
-TEST_IMAGES_URL = 'https://github.com/zalandoresearch/fashion-mnist/raw/master/data/fashion/t10k-images-idx3-ubyte.gz'
-TEST_LABELS_URL = 'https://github.com/zalandoresearch/fashion-mnist/raw/master/data/fashion/t10k-labels-idx1-ubyte.gz'
+# datasets URLs
+BASE_URL = 'https://github.com/zalandoresearch/fashion-mnist/raw/master/data/fashion'
+RESOURCES = {
+    'train': ['train-images-idx3-ubyte.gz', 'train-labels-idx1-ubyte.gz'],
+    'test': ['t10k-images-idx3-ubyte.gz', 't10k-labels-idx1-ubyte.gz']
+}
 
 # Download dataset files if they do not exist
 def download_fashion_mnist(data_dir='./data'):
@@ -153,7 +154,7 @@ def evaluate_model(model_path='fashion_model_best.pt'):
             sample_image, sample_label = test_dataset[i]
             sample_image = sample_image.unsqueeze(0).to(device)
             prediction = model(sample_image).argmax(1)[0].item()
-            print(f"Sample {i + 1}: Predicted = {prediction}, Actual = {sample_label}\n")
+            print(f"Sample {i + 1}: Predicted = {prediction}, Actual = {sample_label}")
 
     except FileNotFoundError:
         print(f"Error: Could not find model file '{model_path}'")
